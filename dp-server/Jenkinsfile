@@ -17,26 +17,26 @@ pipeline {
                                  [$class: 'PathRestriction', excludedRegions: '', includedRegions: '^dt-server/.*\n']
                          ],
                          submoduleCfg                     : [],
-                         userRemoteConfigs                : [[credentialsId: 'ab6d26b4-0736-4764-bc96-556a6599ab2e', url: 'git@github.com:0xFaulty/digital-breakthrough.git']],
+                         userRemoteConfigs                : [[url: 'https://github.com/0xFaulty/digital-breakthrough.git']],
                          poll                             : true]
                 )
             }
         }
         stage('unit test and coverage') {
             steps {
+                sh chmod +x gradlew
                 sh './gradlew dt-server:test --stacktrace'
             }
             post {
                 always {
                     publishHTML([
-                            allowMissing         : false,
+                            allowMissing         : true,
                             alwaysLinkToLastBuild: false,
                             keepAll              : true,
                             reportDir            : '/var/lib/jenkins/workspace/MCS/DigitalBreakthrough/dt-server/build/reports/tests/test/',
                             reportFiles          : 'index.html',
                             reportName           : 'Unit test report'
                     ])
-                    jacoco()
                 }
             }
         }
@@ -52,3 +52,4 @@ pipeline {
         }
     }
 }
+
