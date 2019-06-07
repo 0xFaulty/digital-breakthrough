@@ -1,0 +1,4 @@
+rootProject.name = 'digital-breakthrough'
+include 'user-db-server'
+include 'common'
+
