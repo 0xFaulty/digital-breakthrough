@@ -12,6 +12,8 @@ import lombok.Setter;
 public class UserIdentity {
 
     private String idNumber;
+
     private String idAddress;
+
     private String registrationPlace;
 }

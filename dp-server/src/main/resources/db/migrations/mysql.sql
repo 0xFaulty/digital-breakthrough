@@ -98,25 +98,10 @@ CREATE TABLE user
   username    TEXT                  NOT NULL,
   password    TEXT                  NOT NULL,
   email       TEXT                  NOT NULL,
-  banned      BOOLEAN               NOT NULL DEFAULT FALSE,
+  user_type   VARCHAR(255)          NOT NULL,
+  banned      BOOLEAN               NOT NULL,
   createdAt   TIMESTAMP             NOT NULL DEFAULT NOW(),
   lastVisitAt TIMESTAMP             NOT NULL DEFAULT NOW()
-);
-
-CREATE TABLE user_info
-(
-  userId     BIGINT NOT NULL,
-  firstName  TEXT   NOT NULL,
-  secondName TEXT   NOT NULL,
-  middleName TEXT   NOT NULL
-);
-
-CREATE TABLE user_identity
-(
-  userId    BIGINT  NOT NULL,
-  idIndex   INTEGER NOT NULL,
-  idNumber  INTEGER NOT NULL,
-  idAddress TEXT    NOT NULL
 );
 
 CREATE TABLE user_event

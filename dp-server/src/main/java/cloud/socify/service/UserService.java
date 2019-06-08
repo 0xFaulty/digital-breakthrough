@@ -1,37 +1,50 @@
 package cloud.socify.service;
 
-import cloud.socify.entity.UserEntity;
-import cloud.socify.model.User;
-import cloud.socify.repository.UserIdentityRepository;
-import cloud.socify.repository.UserInfoRepository;
+import cloud.socify.entity.User;
+import cloud.socify.exception.UserAlreadyExistException;
+import cloud.socify.exception.UserNotFoundException;
+import cloud.socify.model.RegistrationRequest;
 import cloud.socify.repository.UserRepository;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.Valid;
 
 @Service
+@RequiredArgsConstructor
+@Transactional
 public class UserService implements IUserService {
 
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserInfoRepository userInfoRepository;
-    @Autowired
-    private UserIdentityRepository userIdentityRepository;
+    private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
-    public User getUser(String id) {
-        Optional<UserEntity> userOpt = userRepository.findById(Long.valueOf(id));
-        if (userOpt.isPresent()) {
-            UserEntity userEntity = userOpt.get();
-            User user = new User(userEntity.getLogin(), userEntity.getPassword());
-            return user;
-        } else
-            return null;
+    public void registerUser(@Valid RegistrationRequest registrationRequest) {
+        String email = registrationRequest.getEmail();
+        boolean userAlreadyExist = userRepository.existsByEmail(email);
+        if (userAlreadyExist) {
+            throw new UserAlreadyExistException(email);
+        }
+
+        String encodedPassword = passwordEncoder.encode(registrationRequest.getPassword());
+
+        User user = new User()
+                .setEmail(email)
+                .setPassword(encodedPassword)
+                .setUserType(registrationRequest.getUserType());
+
+        userRepository.save(user);
     }
 
     @Override
-    public void saveUser(User user) {
-
+    @Transactional(readOnly = true)
+    @PreAuthorize("isAuthenticated()")
+    public User getUserById(Long id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 }

@@ -1,10 +1,11 @@
 package cloud.socify.service;
 
-import cloud.socify.model.User;
+import cloud.socify.entity.User;
+import cloud.socify.model.RegistrationRequest;
 
 public interface IUserService {
 
-    User getUser(String id);
+    void registerUser(RegistrationRequest registrationRequest);
 
-    void saveUser(User user);
+    User getUserById(Long id);
 }
