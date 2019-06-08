@@ -1,5 +1,7 @@
 package cloud.socify.controller;
 
+import cloud.socify.model.ApiError;
+import cloud.socify.model.ApiVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -26,49 +28,4 @@ public class ApiVersionController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiError(500, "error"));
         }
     }
-
-    private class ApiVersion {
-
-        private String version;
-
-        public ApiVersion(String version) {
-            this.version = version;
-        }
-
-        public String getVersion() {
-            return version;
-        }
-
-        public void setVersion(String version) {
-            this.version = version;
-        }
-    }
-
-    private class ApiError {
-
-        private int errorCode;
-        private String errorMessage;
-
-        public ApiError(int errorCode, String errorMessage) {
-            this.errorCode = errorCode;
-            this.errorMessage = errorMessage;
-        }
-
-        public int getErrorCode() {
-            return errorCode;
-        }
-
-        public void setErrorCode(int errorCode) {
-            this.errorCode = errorCode;
-        }
-
-        public String getErrorMessage() {
-            return errorMessage;
-        }
-
-        public void setErrorMessage(String errorMessage) {
-            this.errorMessage = errorMessage;
-        }
-    }
-
 }
