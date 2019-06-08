@@ -42,7 +42,7 @@ pipeline {
         }
         stage('bootRepackage') {
             steps {
-                sh './gradlew dt-server:bootRepackage --stacktrace'
+                sh './gradlew dt-server:bootJar --stacktrace'
             }
         }
         stage('Docker Push') {
