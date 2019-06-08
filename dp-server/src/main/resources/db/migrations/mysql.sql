@@ -122,7 +122,7 @@ CREATE TABLE user_identity
 CREATE TABLE user_event
 (
   userId   BIGINT NOT NULL,
-  courseId TEXT   NOT NULL,
+  eventId  TEXT   NOT NULL,
   rating   DOUBLE NOT NULL
 );
 
@@ -133,10 +133,18 @@ CREATE TABLE user_metric
   value    DOUBLE  NOT NULL
 );
 
-INSERT INTO event (id, name, description)
-VALUES (1, 'Java', 'Java courses'),
-       (2, 'SQL', 'SQL cources'),
-       (1, 'Java course work 1', 'simple course work');
+INSERT INTO event_type (id, name)
+VALUES ('university program'),
+       ('college program'),
+       ('olympiad'),
+       ('courses');
+
+INSERT INTO event (typeId, name, description)
+VALUES (3, 'Java', 'Java courses'),
+       (3, 'SQL', 'SQL courses'),
+       (0, 'Biology', 'Biology university program'),
+       (1, 'Java', 'Biology college program'),
+       (3, 'Java course work 1', 'simple course work');
 
 INSERT INTO user (username, password, email)
 VALUES ('admin', 'password', 'admin@mail.ru'),
@@ -148,4 +156,14 @@ VALUES (2, 'Valentin', 'Bashkirov', 'Victorovich');
 
 INSERT INTO user_identity (userId, idNumber, idAddress)
 VALUES (2, '556661116', 'SPb yl. Zamshina');
+
+INSERT INTO user_event (userId, eventId, rating)
+VALUES (2, 0, 0.8);
+
+INSERT INTO company (name, rating, description)
+VALUES ('Google'),
+ ('Yandex'),
+ ('JetBrains'),
+ ('Faulty inc.');
+
 
