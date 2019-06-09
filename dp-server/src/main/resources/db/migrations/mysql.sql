@@ -104,13 +104,13 @@ CREATE TABLE user
 
 CREATE TABLE student_info
 (
-  userId     BIGINT NOT NULL,
+  userId     BIGINT NOT NULL PRIMARY KEY,
   firstName  TEXT   NOT NULL,
   secondName TEXT   NOT NULL,
   middleName TEXT   NOT NULL,
   photo      TEXT   NOT NULL,
   gender     TEXT   NOT NULL,
-  birthday   DATE   NOT NULL
+  birthDate  DATE   NOT NULL
 );
 
 CREATE TABLE user_event
