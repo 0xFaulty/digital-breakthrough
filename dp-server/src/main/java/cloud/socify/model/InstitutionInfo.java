@@ -15,5 +15,5 @@ public class InstitutionInfo {
     private String name;
     private String email;
     private String description;
-    private double rating;
+    private Double rating;
 }

@@ -11,8 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.Valid;
-
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -22,9 +20,9 @@ public class UserService implements IUserService {
 
     private final PasswordEncoder passwordEncoder;
 
-
     @Override
-    public void registerUser(@Valid RegistrationRequest registrationRequest) {
+    @PreAuthorize("isAnonymous()")
+    public void registerUser(RegistrationRequest registrationRequest) {
         String email = registrationRequest.getEmail();
         boolean userAlreadyExist = userRepository.existsByEmail(email);
         if (userAlreadyExist) {
@@ -45,6 +43,7 @@ public class UserService implements IUserService {
     @Transactional(readOnly = true)
     @PreAuthorize("isAuthenticated()")
     public User getUserById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException(id));
     }
 }

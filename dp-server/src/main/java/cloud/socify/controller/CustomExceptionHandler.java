@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -25,6 +24,12 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleUserAlreadyExistException(UserAlreadyExistException ex) {
         ErrorDto internalServerError = new ErrorDto().setMessage("User with email " + ex.getEmail() + " already exist");
         return new ResponseEntity<>(internalServerError, HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity<Object> handleUserAlreadyExistException(IllegalArgumentException ex) {
+        ErrorDto internalServerError = new ErrorDto().setMessage("Ошибка в бизнес-данных");
+        return new ResponseEntity<>(internalServerError, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @ExceptionHandler({UserNotFoundException.class})

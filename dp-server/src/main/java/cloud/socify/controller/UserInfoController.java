@@ -1,6 +1,8 @@
 package cloud.socify.controller;
 
-import cloud.socify.model.*;
+import cloud.socify.model.CompanyInfo;
+import cloud.socify.model.InstitutionInfo;
+import cloud.socify.model.StudentInfo;
 import cloud.socify.model.filtering.CompanyInfoFilterRequest;
 import cloud.socify.model.filtering.StudentFilterRequest;
 import cloud.socify.model.filtering.UniversityFilterRequest;
@@ -9,10 +11,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -49,5 +48,12 @@ public class UserInfoController {
     @GetMapping("/institution/{userId}")
     public InstitutionInfo institutionInfo(@PathVariable Long userId) {
         return userInfoService.getInstitutionInfo(userId);
+    }
+
+    @PutMapping("/student/{userId}")
+    public void saveStudentInfo(@PathVariable Long userId,
+                                @RequestBody StudentInfo studentInfo) {
+        studentInfo.setUserId(userId);
+        userInfoService.saveStudentInfo(studentInfo);
     }
 }

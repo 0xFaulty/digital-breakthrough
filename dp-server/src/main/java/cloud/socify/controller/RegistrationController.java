@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/registration")
@@ -16,7 +18,7 @@ public class RegistrationController {
     private final IUserService userService;
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public void register(@RequestBody RegistrationRequest registrationRequest) {
+    public void register(@Valid @RequestBody RegistrationRequest registrationRequest) {
         userService.registerUser(registrationRequest);
     }
 }
