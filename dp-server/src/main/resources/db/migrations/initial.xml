@@ -11,5 +11,22 @@
         <sqlFile path="classpath:/db/migrations/mysql.sql"/>
     </changeSet>
 
+    <changeSet id="2" author="vba">
+        <sqlFile path="classpath:/db/migrations/company.sql"/>
+        <sqlFile path="classpath:/db/migrations/institution.sql"/>
+        <sqlFile path="classpath:/db/migrations/event.sql"/>
+        <sqlFile path="classpath:/db/migrations/skill.sql"/>
+        <sqlFile path="classpath:/db/migrations/vacancy.sql"/>
+        <sqlFile path="classpath:/db/migrations/metric.sql"/>
+        <sqlFile path="classpath:/db/migrations/eventSkill.sql"/>
+        <sqlFile path="classpath:/db/migrations/vacancySkill.sql"/>
+        <sqlFile path="classpath:/db/migrations/educationPro.sql"/>
+        <sqlFile path="classpath:/db/migrations/companyVacancy.sql"/>
+        <sqlFile path="classpath:/db/migrations/userType.sql"/>
+        <sqlFile path="classpath:/db/migrations/studentInfo.sql"/>
+        <sqlFile path="classpath:/db/migrations/user.sql"/>
+        <sqlFile path="classpath:/db/migrations/userEvent.sql"/>
+        <sqlFile path="classpath:/db/migrations/userMetric.sql"/>
+    </changeSet>
 
 </databaseChangeLog>
