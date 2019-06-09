@@ -95,7 +95,6 @@ CREATE TABLE company_vacancy
 CREATE TABLE user
 (
   id          BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  username    TEXT                  NOT NULL,
   password    TEXT                  NOT NULL,
   email       TEXT                  NOT NULL,
   user_type   VARCHAR(255)          NOT NULL,
@@ -117,38 +116,32 @@ CREATE TABLE user_metric
   metricId INTEGER NOT NULL,
   value    DOUBLE  NOT NULL
 );
+#
+# INSERT INTO event_type (id, name)
+# VALUES ('university program'),
+#        ('college program'),
+#        ('olympiad'),
+#        ('courses');
 
-INSERT INTO event_type (id, name)
-VALUES ('university program'),
-       ('college program'),
-       ('olympiad'),
-       ('courses');
-
-INSERT INTO event (typeId, name, description)
-VALUES (3, 'Java', 'Java courses'),
-       (3, 'SQL', 'SQL courses'),
-       (0, 'Biology', 'Biology university program'),
-       (1, 'Java', 'Biology college program'),
-       (3, 'Java course work 1', 'simple course work');
-
-INSERT INTO user (username, password, email)
-VALUES ('admin', 'password', 'admin@mail.ru'),
-       ('guest', 'password', 'guest@mail.ru'),
-       ('valentin', 'password', 'valentin@mail.ru');
-
-INSERT INTO user_info (userId, firstName, secondName, middleName)
-VALUES (2, 'Valentin', 'Bashkirov', 'Victorovich');
-
-INSERT INTO user_identity (userId, idNumber, idAddress)
-VALUES (2, '556661116', 'SPb yl. Zamshina');
-
-INSERT INTO user_event (userId, eventId, rating)
-VALUES (2, 0, 0.8);
-
-INSERT INTO company (name, rating, description)
-VALUES ('Google'),
- ('Yandex'),
- ('JetBrains'),
- ('Faulty inc.');
+# INSERT INTO event (typeId, name, description)
+# VALUES (3, 'Java', 'Java courses'),
+#        (3, 'SQL', 'SQL courses'),
+#        (0, 'Biology', 'Biology university program'),
+#        (1, 'Java', 'Biology college program'),
+#        (3, 'Java course work 1', 'simple course work');
+# INSERT INTO user_info (userId, firstName, secondName, middleName)
+# VALUES (2, 'Valentin', 'Bashkirov', 'Victorovich');
+#
+# INSERT INTO user_identity (userId, idNumber, idAddress)
+# VALUES (2, '556661116', 'SPb yl. Zamshina');
+#
+# INSERT INTO user_event (userId, eventId, rating)
+# VALUES (2, 0, 0.8);
+#
+# INSERT INTO company (name, rating, description)
+# VALUES ('Google'),
+#  ('Yandex'),
+#  ('JetBrains'),
+#  ('Faulty inc.');
 
 

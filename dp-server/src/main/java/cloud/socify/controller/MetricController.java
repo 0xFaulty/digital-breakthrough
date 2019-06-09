@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/metric")
 public class MetricController {
 
     @Autowired
