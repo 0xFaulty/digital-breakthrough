@@ -17,16 +17,10 @@ CREATE TABLE skill
 CREATE TABLE event
 (
   id          BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  typeId      BIGINT                NOT NULL,
+  eventType   TEXT                  NOT NULL,
   name        TEXT                  NOT NULL,
   rating      DOUBLE                NOT NULL,
   description TEXT                  NOT NULL
-);
-
-CREATE TABLE event_type
-(
-  id   BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-  name TEXT                  NOT NULL
 );
 
 CREATE TABLE event_skill
@@ -79,7 +73,6 @@ CREATE TABLE company_vacancy
 (
   companyId    BIGINT,
   vacancyId    BIGINT,
-  name         TEXT NOT NULL,
   salary       TEXT,
   currencyType TEXT,
   description  TEXT NOT NULL
@@ -115,9 +108,10 @@ CREATE TABLE student_info
 
 CREATE TABLE user_event
 (
-  userId  BIGINT NOT NULL,
-  eventId TEXT   NOT NULL,
-  rating  DOUBLE NOT NULL
+  userId    BIGINT NOT NULL,
+  eventId   TEXT   NOT NULL,
+  eventDate DATE   NOT NULL,
+  rating    DOUBLE NOT NULL
 );
 
 CREATE TABLE user_metric
