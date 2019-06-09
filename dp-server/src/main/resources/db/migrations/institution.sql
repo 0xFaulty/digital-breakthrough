@@ -1,5 +1,5 @@
 INSERT INTO institution (userId, name, rating, description) VALUES (289, 'Санкт-Петербургский политехнический университет Петра Великого', 9.1, '');
-INSERT INTO institution (userId, name, rating, description) VALUES (354, 'Санкт-Петербургский национальный исследовательский университет информационных технологий',  механики и оптики, '');
+INSERT INTO institution (userId, name, rating, description) VALUES (354, 'Санкт-Петербургский национальный исследовательский университет информационных технологий механики и оптики', 8.9, '');
 INSERT INTO institution (userId, name, rating, description) VALUES (825, 'Санкт-Петербургский государственный экономический университет', 7.9, '');
 INSERT INTO institution (userId, name, rating, description) VALUES (555, 'Санкт-Петербургский Горный университет', 6.9, '');
 INSERT INTO institution (userId, name, rating, description) VALUES (880, 'Санкт-Петербургский государственный университет телекоммуникаций им. проф. М.А.Бонч-Бруевича', 6.6, '');

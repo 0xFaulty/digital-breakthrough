@@ -135,12 +135,12 @@ public class ApplicationTest {
         String cM = "INSERT INTO metric (name, rating, description) VALUES ('%s', %s, '');";
         for (String s : metric)
             metricSql.add(String.format(cM, s, rndRating()));
-        String cES = "INSERT INTO event_skill (eventId, skillId) VALUES (%s, %s, '');";
+        String cES = "INSERT INTO event_skill (eventId, skillId) VALUES (%s, %s);";
         for (int i = 0; i < event.size(); i++) {
             for (Integer skillId : rndSkillsId())
                 eventSkillSql.add(String.format(cES, i, skillId));
         }
-        String cVS = "INSERT INTO vacancy_skill (vacancyId, skillId) VALUES (%s, %s, '');";
+        String cVS = "INSERT INTO vacancy_skill (vacancyId, skillId) VALUES (%s, %s);";
         for (int i = 0; i < vacancy.size(); i++) {
             for (Integer skillId : rndSkillsId())
                 vacancySkillSql.add(String.format(cVS, i, skillId));
