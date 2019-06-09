@@ -1,23 +1,22 @@
 package cloud.socify.model;
 
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfo {
-
-    private String email;
-    private String userType;
+public class StudentInfo {
     private String firstName;
     private String secondName;
     private String middleName;
+    private Long userId;
     private String photo;
-    private String gender;
-    private Date birthday;
+    private Gender gender;
+    private LocalDate birthDate;
 }
