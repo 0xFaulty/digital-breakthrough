@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -88,6 +89,7 @@ public class ApplicationTest {
         return new Random().nextDouble();
     }
 
+    @Ignore
     @Test
     public void name() throws IOException {
         readCompany();

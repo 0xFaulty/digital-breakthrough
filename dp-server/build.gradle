@@ -49,7 +49,7 @@ dependencies {
 }
 
 def path2dockerRegistry = 'socify.cloud:5000'
-def IMAGE_NAME = 'dt-server'
+def IMAGE_NAME = 'dp-server'
 
 docker {
     name "${path2dockerRegistry}/${IMAGE_NAME}"

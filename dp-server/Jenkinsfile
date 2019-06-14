@@ -14,7 +14,7 @@ pipeline {
                          doGenerateSubmoduleConfigurations: false,
                          extensions                       : [
                                  [$class: 'DisableRemotePoll'],
-                                 [$class: 'PathRestriction', excludedRegions: '', includedRegions: '^dt-server/.*\n']
+                                 [$class: 'PathRestriction', excludedRegions: '', includedRegions: '^dp-server/.*\n']
                          ],
                          submoduleCfg                     : [],
                          userRemoteConfigs                : [[url: 'https://github.com/0xFaulty/digital-breakthrough.git']],
@@ -22,10 +22,9 @@ pipeline {
                 )
             }
         }
-        stage('unit test and coverage') {
+        stage('Unit Tests and Coverage') {
             steps {
-                sh chmod +x gradlew
-                sh './gradlew dt-server:test --stacktrace'
+                sh './gradlew dp-server:test --stacktrace'
             }
             post {
                 always {
@@ -33,23 +32,37 @@ pipeline {
                             allowMissing         : true,
                             alwaysLinkToLastBuild: false,
                             keepAll              : true,
-                            reportDir            : '/var/lib/jenkins/workspace/MCS/DigitalBreakthrough/dt-server/build/reports/tests/test/',
+                            reportDir            : '${env.WORKSPACE}/DigitalBreakthrough/dp-server/build/reports/tests/test/',
                             reportFiles          : 'index.html',
                             reportName           : 'Unit test report'
                     ])
                 }
             }
         }
-        stage('bootRepackage') {
+        stage('Boot Repackage') {
             steps {
-                sh './gradlew dt-server:bootJar --stacktrace'
+                sh './gradlew dp-server:bootJar --stacktrace'
             }
         }
         stage('Docker Push') {
             steps {
-                sh './gradlew dt-server:dockerPush --stacktrace'
+                sh './gradlew dp-server:dockerPush --stacktrace'
+            }
+        }
+        stage('Notify Rancher') {
+            steps {
+                script{
+                    rancher confirm: true,
+                             credentialId: 'd67316a2-1b80-4a1c-bdcc-8086598b2d1a',
+                             endpoint: 'http://socify.cloud:8085/v2-beta',
+                             environmentId: '1a5',
+                             environments: '',
+                             image: 'socify.cloud:5000/dp-server',
+                             ports: '',
+                             service: 'Socify/digital-breakthrough-hackaton',
+                             timeout: 2700
+                }
             }
         }
     }
 }
-
