@@ -1,7 +1,7 @@
 pipeline {
     agent any
     options {
-        buildDiscarder(logRotator(numToKeepStr: '30'))
+        buildDiscarder(logRotator(numToKeepStr: '10'))
         timeout(time: 1, unit: 'HOURS')
         timestamps()
     }
@@ -14,10 +14,10 @@ pipeline {
                          doGenerateSubmoduleConfigurations: false,
                          extensions                       : [
                                  [$class: 'DisableRemotePoll'],
-                                 [$class: 'PathRestriction', excludedRegions: '', includedRegions: '^dp-server/.*\n']
+                                 [$class: 'PathRestriction', excludedRegions: '', includedRegions: '^dp-server/.*']
                          ],
                          submoduleCfg                     : [],
-                         userRemoteConfigs                : [[url: 'https://github.com/0xFaulty/digital-breakthrough.git']],
+                         userRemoteConfigs                : [[credentialsId: 'a80267cc-7989-44dd-9656-f422899cb98c', url: 'git@github.com:0xFaulty/digital-breakthrough.git']],
                          poll                             : true]
                 )
             }
